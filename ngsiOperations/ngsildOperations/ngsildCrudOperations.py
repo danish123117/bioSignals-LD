@@ -49,7 +49,7 @@ def ngsi_patch(data,entity,url ="orion:1026"): # this is fine
     response = requests.patch(url, headers=headers, json=data)
     return response
 
-def ngsi_get_current(entity, url= "localhost:1026",entity_type='Stress'):
+def ngsi_get_current(entity, url= "localhost:1026",entity_type='Stress'): # this should be ok
     url = f"http://{url}/ngsi-ld/v1/entities/{entity}"
 
     payload = {}
