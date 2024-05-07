@@ -26,7 +26,7 @@ def ngsi_get_historical(entity, window_length=5000, url="mintaka:8080" , attribu
     payload ={}
     headers = {
         'NGSILD-Tenant': 'openiot',
-        'Link': '"<http://context/ngsi-context.jsonld>"; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
+        'Link': '"<http://context:5051/ngsi-context.jsonld>"; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     }
     params = {
         'lastN': window_length,
@@ -44,17 +44,17 @@ def ngsi_patch(data,entity,url ="orion:1026"): # this is fine
     url = f"http://{url}/ngsi-ld/v1/entities/{entity}/attrs"
     headers = {
         'Content-Type':"application/json",
-        "Link": '"<http://context/ngsi-context.jsonld>"; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
+        "Link": '"<http://context:5051/ngsi-context.jsonld>"; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
      }
     response = requests.patch(url, headers=headers, json=data)
     return response
 
-def ngsi_get_current(entity, url= "localhost:1026",entity_type='Stress'): # this should be ok
+def ngsi_get_current(entity, url= "orion:1026",entity_type='Stress'): # this should be ok
     url = f"http://{url}/ngsi-ld/v1/entities/{entity}"
 
     payload = {}
     headers = {
-  'Link': '<http://context/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
+  'Link': '<http://context:5051/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
   'Accept': 'application/json'
 }
 
