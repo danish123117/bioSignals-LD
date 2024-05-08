@@ -2,16 +2,14 @@ import time
 import json
 import os
 import numpy as np
-import ngsiOperations.ngsiv2Operations.ngsiv2CrudOperations as v2
+import ngsiOperations.ngsildOperations.ngsildCrudOperations as v1
 import helperFunctions.helperFunctions as hp
 import bioTools.emgTools as emg
 
 
-def anomaly_detector(entity_sensor,entity_stress):
+def anomaly_detector():
     '''The looped part has an execution time of ~0.065 seconds'''
-    entity = entity_sensor# entity_sensor#  holds emg data eg. 'urn:ngsi-ld:Operator:001'
-    entity2 =  entity_stress# holds stress state as mean, median and mean power frequencies e.g. 'urn:ngsi-ld:Stress:001'
-    window_length = 200
+    window_length = 5000
     script_dir = os.path.dirname(os.path.abspath(__file__))
     params_path = os.path.join(script_dir, 'parms.json')
     with open(params_path, 'r') as json_file:
@@ -20,7 +18,7 @@ def anomaly_detector(entity_sensor,entity_stress):
     time.sleep(5)
     while True:
         start_time = time.time()
-        data = v2.ngsi_get_historical('Thing:EMG1000',window_length)
+        data = v1.ngsi_get_historical('urn:ngsi-ld:sEMG:001',window_length)
         #if data ==0:     # case when the there is no data transmission
             # do something when error code is returned probably skip the code   
         
@@ -33,10 +31,10 @@ def anomaly_detector(entity_sensor,entity_stress):
         #print(zero_cross_frequency)
         s_mean, s_med, s_mpower, s_zcf = emg.stress_out(mean_frequency, median_frequency, mean_power_frequency,zero_cross_frequency, parms) # stress level 
         #print(s_mean, s_med, s_mpower, s_zcf)
-        payload_raw = v2.stress_payload(s_mean.tolist(), s_med.tolist(), s_mpower.tolist(), s_zcf.tolist() )    
+        payload_raw = v1.stress_payload(s_mean.tolist(), s_med.tolist(), s_mpower.tolist(), s_zcf.tolist() )    
         json_data = json.dumps(payload_raw)
         #print(payload_raw)
-        resp = v2.ngsi_patch(json_data,entity2)
+        resp = v1.ngsi_patch(json_data,"urn:ngsi-ld:EmgFrequencyDomainFeatures:001")
         print(resp.status_code)
         #print(time.time() - start_time)
         if (time.time() - start_time) < 5:

@@ -1,6 +1,6 @@
 import requests
 
-def sensor_provision(sensor_entity,api_key='placeholder_api_key'):
+def sensor_provision():
 # provision service path
     url = 'http://iot-agent:4041/iot/services'
     headers = {
@@ -97,23 +97,23 @@ def sensor_provision(sensor_entity,api_key='placeholder_api_key'):
     data = {
         "devices": [
             {
-                "device_id": "EMG1000",
-                "entity_name": "urn:ngsi-ld:EMG1000",
+                "device_id": "sEMG",
+                "entity_name": "urn:ngsi-ld:sEMG:001",
                 "entity_type": "sEMG"
             },
                         {
                 "device_id": "ecg",
-                "entity_name": "urn:ngsi-ld:ecg",
+                "entity_name": "urn:ngsi-ld:PolarH10TopicECG:001",
                 "entity_type": "PolarH10TopicECG"
             },
                         {
                 "device_id": "hr",
-                "entity_name": "urn:ngsi-ld:hr",
+                "entity_name": "urn:ngsi-ld:PolarH10TopicHR:001",
                 "entity_type": "PolarH10TopicHR"
             },
                         {
                 "device_id": "acc",
-                "entity_name": "urn:ngsi-ld:acc",
+                "entity_name": "urn:ngsi-ld:PolarH10TopicACC:001",
                 "entity_type": "PolarH10TopicACC"
             }
 

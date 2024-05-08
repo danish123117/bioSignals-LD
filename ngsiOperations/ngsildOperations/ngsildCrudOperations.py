@@ -39,7 +39,7 @@ def ngsi_get_historical(entity, window_length=5000, url="mintaka:8080" , attribu
 
 def ngsi_patch(data,entity,url ="orion:1026"): # this is fine
     """
-    The function update the value on an NGSI entity using patch to orion context broker
+    The function update the value on an NGSI-ld entity using patch to orion context broker
     """
     url = f"http://{url}/ngsi-ld/v1/entities/{entity}/attrs"
     headers = {
