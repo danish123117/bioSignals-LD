@@ -44,11 +44,11 @@ def create_Trial():
     return render_template(
         '2_run_AD.html',
         entity_create_code= resp_entities_create.status_code,
-        entity_create_message=resp_entities_create.text,
+        #entity_create_message=resp_entities_create.text,
         prov_servicepath_status=servicepath_provision_response.status_code ,
-        prov_servicepath_message=servicepath_provision_response.text ,
+        #prov_servicepath_message=servicepath_provision_response.text ,
         prov_sensor_status=sensor_provision_response.status_code,
-        prov_sensor_message =sensor_provision_response.text,
+        #prov_sensor_message =sensor_provision_response.text,
              
                            )
 @app.route('/runAD')

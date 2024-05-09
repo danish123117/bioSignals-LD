@@ -17,10 +17,10 @@ def sensor_provision():
                 "resource": "/iot/json",
                 "transport": "MQTT",
                 "attributes": [
-                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Text"},
-                    {"object_id": "data", "name": "data", "type": "array"},
-                    {"object_id": "index", "name": "index", "type": "Integer"},
-                    {"object_id": "feaisability", "name": "feaisability", "type": "array"}]
+                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
+                    {"object_id": "data", "name": "data", "type": "Property"},
+                    {"object_id": "index", "name": "index", "type": "Property"},
+                    {"object_id": "feaisability", "name": "feaisability", "type": "Property"}]
                
             },
             {
@@ -30,15 +30,15 @@ def sensor_provision():
                 "resource": "/iot/json",
                 "transport": "MQTT",
                 "attributes": [
-                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Integer"},
-                    {"object_id": "sensorTimeStamp", "name": "sensorTimeStamp", "type": "Integer"},
-                    {"object_id": "ecg", "name": "ecg", "type": "array"},
-                    {"object_id": "sessionId", "name": "sessionId", "type": "Integer"}
+                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
+                    {"object_id": "sensorTimeStamp", "name": "sensorTimeStamp", "type": "Property"},
+                    {"object_id": "ecg", "name": "ecg", "type": "Property"},
+                    {"object_id": "sessionId", "name": "sessionId", "type": "Property"}
                     ],
                 "static_attributes": [
-                    {"object_id": "clientId", "name": "clientId", "type": "string"},
-                    {"object_id": "deviceId", "name": "deviceId", "type": "string"},
-                    {"object_id": "sampleRate", "name": "sampleRate", "type": "Integer"}                    
+                    {"object_id": "clientId", "name": "clientId", "type": "Property"},
+                    {"object_id": "deviceId", "name": "deviceId", "type": "Property"},
+                    {"object_id": "sampleRate", "name": "sampleRate", "type": "Property"}                    
 
                 ]
             },
@@ -49,15 +49,15 @@ def sensor_provision():
                 "resource": "/iot/json",
                 "transport": "MQTT",
                 "attributes": [
-                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Integer"},
-                    {"object_id": "sensorTimeStamp", "name": "sensorTimeStamp", "type": "Integer"},
-                    {"object_id": "acc", "name": "acc", "type": "array"},
-                    {"object_id": "sessionId", "name": "sessionId", "type": "Integer"},
-                    {"object_id": "sampleRate", "name": "sampleRate", "type": "Integer"}
+                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
+                    {"object_id": "sensorTimeStamp", "name": "sensorTimeStamp", "type": "Property"},
+                    {"object_id": "acc", "name": "acc", "type": "Property"},
+                    {"object_id": "sessionId", "name": "sessionId", "type": "Property"},
+                    {"object_id": "sampleRate", "name": "sampleRate", "type": "Property"}
                 ],
                 "static_attributes": [
-                    {"object_id": "clientId", "name": "clientId", "type": "string"},
-                    {"object_id": "deviceId", "name": "deviceId", "type": "string"},
+                    {"object_id": "clientId", "name": "clientId", "type": "Property"},
+                    {"object_id": "deviceId", "name": "deviceId", "type": "Property"},
                 ]
             },
             {
@@ -67,18 +67,18 @@ def sensor_provision():
                 "resource": "/iot/json",
                 "transport": "MQTT",
                 "attributes": [
-                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Integer"},
-                    {"object_id": "sensorTimeStamp", "name": "sensorTimeStamp", "type": "Integer"},
-                    {"object_id": "hr", "name": "hr", "type": "Integer"},
-                    {"object_id": "hrv", "name": "hrv", "type": "Integer"},
-                    {"object_id": "rr", "name": "rr", "type": "Integer"},                    
-                    {"object_id": "sessionId", "name": "sessionId", "type": "Integer"},
+                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
+                    {"object_id": "sensorTimeStamp", "name": "sensorTimeStamp", "type": "Property"},
+                    {"object_id": "hr", "name": "hr", "type": "Property"},
+                    {"object_id": "hrv", "name": "hrv", "type": "Property"},
+                    {"object_id": "rr", "name": "rr", "type": "Property"},                    
+                    {"object_id": "sessionId", "name": "sessionId", "type": "Property"},
 
                 ],
                 "static_attributes": [
-                    {"object_id": "clientId", "name": "clientId", "type": "string"},
-                    {"object_id": "deviceId", "name": "deviceId", "type": "string"},
-                    {"object_id": "sampleRate", "name": "sampleRate", "type": "Integer"}
+                    {"object_id": "clientId", "name": "clientId", "type": "Property"},
+                    {"object_id": "deviceId", "name": "deviceId", "type": "Property"},
+                    {"object_id": "sampleRate", "name": "sampleRate", "type": "Property"}
                 ]
             }
         ]

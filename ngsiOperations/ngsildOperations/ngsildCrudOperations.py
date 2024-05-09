@@ -1,22 +1,23 @@
 import requests
+import json
 def stress_payload(frequency_median_norm, frequency_mean_norm, frequency_meanPower_norm, frequency_zeroCrossing_norm):# this one remains same
     payload_raw = {
         "medianFrequencyState": {
-        "type": "array",
+        "type": "Property",
         "value": frequency_median_norm},
         "meanFrequencyState": {
-         "type": "array",
+         "type": "Property",
          "value": frequency_mean_norm },
        "meanPowerFrequencyState": {
-          "type": "array",
+          "type": "Property",
           "value": frequency_meanPower_norm
         },
         "zeroCrossingFrequency": {
-          "type": "array",
+          "type": "Property",
           "value": frequency_zeroCrossing_norm
         },
      }
-    return payload_raw
+    return json.dumps(payload_raw)
 
 def ngsi_get_historical(entity, window_length=5000, url="mintaka:8080" , attribute = "data"):  # double check on EMG sensor entity what attribute reprements the signal values
     """
@@ -46,7 +47,7 @@ def ngsi_patch(data,entity,url ="orion:1026"): # this is fine
         'Content-Type':"application/json",
         "Link": '"<http://context:5051/ngsi-context.jsonld>"; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
      }
-    response = requests.patch(url, headers=headers, json=data)
+    response = requests.request("PATCH", url, headers=headers, data=data)
     return response
 
 def ngsi_get_current(entity, url= "orion:1026",entity_type='Stress'): # this should be ok

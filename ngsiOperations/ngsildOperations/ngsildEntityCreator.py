@@ -16,35 +16,35 @@ def ngsi_create_trial_UC2():
     "id": "urn:ngsi-ld:EmgFrequencyDomainFeatures:001",
     "type": "EmgFrequencyDomainFeatures",
     "medianFrequencyState": {
-      "type": "array",
+      "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]},
     "meanFrequencyState": {
-      "type": "array",
+      "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] },
     "meanPowerFrequencyState": {
-      "type": "array",
+      "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]},
     "zeroCrossingFrequencyState": {
-      "type": "array",
+      "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}
      }  
     d_emg = {
     "id": "urn:ngsi-ld:sEMG:001",
     "type": "sEMG",
     "timeStamp": {
-      "type": "Text",
+      "type": "Property",
       "value": "132"
     },
     "index": {
-      "type": "Integer",
+      "type": "Property",
       "value": 0
     },
     "data":{
-      "type":"array",
+      "type":"Property",
       "value":[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
               },
     "feaisability":{
-      "type":"array",
+      "type":"Property",
       "value":[True,True,True,True,True,True,True,True]}
     }
     ar = 73*[0]
@@ -52,31 +52,31 @@ def ngsi_create_trial_UC2():
     "id": "urn:ngsi-ld:PolarH10TopicECG:001",
     "type": "PolarH10TopicECG",
     "clientId": {
-      "type": "Text",
+      "type": "Property",
       "value": "0000"
       },
     "deviceId": {
-      "type": "Text",
+      "type": "Property",
       "value": "0000"
       },
     "sessionId":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "timeStamp":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "sampleRate":{
-      "type":"Integer",
+      "type":"Property",
       "value":130
       },
     "sensorTimeStamp":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "ecg":{
-      "type":"array",
+      "type":"Property",
       "value":ar
       }
     }
@@ -85,35 +85,35 @@ def ngsi_create_trial_UC2():
     "id": "urn:ngsi-ld:PolarH10TopicHR:001",
     "type": "PolarH10TopicHR",
     "clientId": {
-      "type": "Text",
+      "type": "Property",
       "value": "0000"
       },
     "deviceId": {
-      "type": "Text",
+      "type": "Property",
       "value": "0000"
       },
     "sessionId":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "timeStamp":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "sensorTimeStamp":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "hr":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "hrv":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "rr":{
-      "type":"array",
+      "type":"Property",
       "value":[0]
       }
     }
@@ -122,31 +122,31 @@ def ngsi_create_trial_UC2():
     "id": "urn:ngsi-ld:PolarH10TopicACC:001",
     "type": "PolarH10TopicACC",
     "clientId": {
-      "type": "Text",
+      "type": "Property",
       "value": "0000"
       },
     "deviceId": {
-      "type": "Text",
+      "type": "Property",
       "value": "0000"
       },
     "sessionId":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "timeStamp":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "sampleRate":{
-      "type":"Integer",
+      "type":"Property",
       "value":25
       },
     "sensorTimeStamp":{
-      "type":"Integer",
+      "type":"Property",
       "value":0
       },
     "acc":{
-      "type":"array",
+      "type":"Property",
       "value":ac
       }
     }
@@ -159,35 +159,35 @@ def ngsi_create_trial_UC1():
     "id": "urn:ngsi-ld:EmgFrequencyDomainFeatures:001",
     "type": "EmgFrequencyDomainFeatures",
     "medianFrequencyState": {
-      "type": "array",
+      "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]},
     "meanFrequencyState": {
-      "type": "array",
+      "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] },
     "meanPowerFrequencyState": {
-      "type": "array",
+      "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]},
     "zeroCrossingFrequencyState": {
-      "type": "array",
+      "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}
      }  
     d_emg = {
     "id": "urn:ngsi-ld:sEMG:001",
     "type": "sEMG",
     "timeStamp": {
-      "type": "Text",
+      "type": "Property",
       "value": "132"
     },
     "index": {
-      "type": "Integer",
+      "type": "Property",
       "value": 0
     },
     "data":{
-      "type":"array",
+      "type":"Property",
       "value":[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
               },
     "feaisability":{
-      "type":"array",
+      "type":"Property",
       "value":[True,True,True,True,True,True,True,True]}
     }
     payload = json.dumps([d_stress,d_emg])

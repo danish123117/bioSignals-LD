@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 import json 
 #import requests 
-from ngsiOperations.ngsiv2Operations.ngsiv2CrudOperations import ngsi_get_current
+from ngsiOperations.ngsildOperations.ngsildCrudOperations import ngsi_get_current
 import time 
 import numpy as np 
 
