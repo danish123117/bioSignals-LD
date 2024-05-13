@@ -12,7 +12,7 @@ def stress_payload(frequency_median_norm, frequency_mean_norm, frequency_meanPow
           "type": "Property",
           "value": frequency_meanPower_norm
         },
-        "zeroCrossingFrequency": {
+        "zeroCrossingFrequencyState": {
           "type": "Property",
           "value": frequency_zeroCrossing_norm
         },
@@ -27,12 +27,13 @@ def ngsi_get_historical(entity, window_length=5000, url="localhost:8080" , attri
     payload ={}
     headers = {
         'NGSILD-Tenant': 'openiot',
-        'Link': '"<http://context:5051/ngsi-context.jsonld>"; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
+        'Link': '<http://context:5051/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
+        'NGSILD-Path': '/'
     }
     params = {
         'lastN': window_length,
         'attrs': attribute,
-        'options': 'keyValues'
+        'options': 'temporalValues'
         }
     response = requests.request("GET",url, headers=headers, params=params,data= payload)
    # if response.status_code == 200:
@@ -45,7 +46,7 @@ def ngsi_patch(data,entity,url ="localhost:1026"): # this is fine
     url = f"http://{url}/ngsi-ld/v1/entities/{entity}/attrs"
     headers = {
         'Content-Type':"application/json",
-        "Link": '"<http://context:5051/ngsi-context.jsonld>"; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
+        "Link": '<http://context:5051/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
      }
     response = requests.request("PATCH", url, headers=headers, data=data)
     return response

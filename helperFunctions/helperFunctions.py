@@ -9,11 +9,10 @@ def data_to_np(data, key="data"):
     And then convert it to a transposed np array. This allows for batch processing 
     of multichannel EMG data when extracting features.
     """
-   # data = json.loads(data)
-    print(data)
-    parsed_data = data[key]
-    intlist =[ast.literal_eval(string) for string in parsed_data]
+    #data2 = json.loads(dataa)
+    #print(dataa)
+    parsed_data = [np.array(element[0]) for element in data["data"]["values"]]
+    #intlist =[ast.literal_eval(string) for string in parsed_data]
    # print(parsed_data)
-    converted_data = [[float(num) for num in sublist] for sublist in intlist]
-    numpy_arr = np.array(converted_data)
+    numpy_arr  = np.array(parsed_data)
     return numpy_arr

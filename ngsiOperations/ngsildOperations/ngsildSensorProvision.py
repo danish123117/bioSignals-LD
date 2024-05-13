@@ -14,7 +14,7 @@ def sensor_provision_UC2():
                 "apikey": "danishabbas1",
                 "cbroker": "http://orion:1026",
                 "entity_type": "sEMG",
-                "resource": "/iot/json",
+                "resource": "",
                 "transport": "MQTT",
                 "attributes": [
                     {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
@@ -141,7 +141,7 @@ def sensor_provision_UC1():
                 "apikey": "danishabbas1",
                 "cbroker": "http://orion:1026",
                 "entity_type": "sEMG",
-                "resource": "/iot/json",
+                "resource": "",
                 "transport": "MQTT",
                 "attributes": [
                     {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
@@ -161,16 +161,21 @@ def sensor_provision_UC1():
    # url = 'http://iot-agent:4041/iot/devices'
     url = 'http://localhost:4041/iot/devices'
     headers = {
-        'Content-Type': 'application/json',
-        'fiware-service': 'openiot',
-        'fiware-servicepath': '/'
+        'Content-Type': 'application/json', # 
+        'fiware-service': 'openiot', #  fiware-service
+        'fiware-servicepath': '/'    #  fiware-servicepath
     }
     data = {
         "devices": [
             {
                 "device_id": "EMG1000",
                 "entity_name": "urn:ngsi-ld:sEMG:EMG1000",
-                "entity_type": "sEMG"
+                "entity_type": "sEMG",
+                "attributes": [
+                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
+                    {"object_id": "data", "name": "data", "type": "Property"},
+                    {"object_id": "index", "name": "index", "type": "Property"},
+                    {"object_id": "feaisability", "name": "feaisability", "type": "Property"}]
             }
         ]
     }
