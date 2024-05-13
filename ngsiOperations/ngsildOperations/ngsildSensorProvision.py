@@ -1,6 +1,6 @@
 import requests
 
-def sensor_provision():
+def sensor_provision_UC2():
 # provision service path
     url = 'http://iot-agent:4041/iot/services'
     headers = {
@@ -124,3 +124,64 @@ def sensor_provision():
     #print(sensor_response.status_code)
     #print(sensor_response.text)
     return servicepath_provision_response , sensor_provision_response
+
+def sensor_provision_UC1():
+# provision service path
+   # url = 'http://iot-agent:4041/iot/services'
+    url = 'http://localhost:4041/iot/services'
+    headers = {
+        'Content-Type': 'application/json',
+        'fiware-service': 'openiot',
+        'fiware-servicepath': '/'
+
+    }
+    data = {
+        "services": [
+            {
+                "apikey": "danishabbas1",
+                "cbroker": "http://orion:1026",
+                "entity_type": "sEMG",
+                "resource": "/iot/json",
+                "transport": "MQTT",
+                "attributes": [
+                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
+                    {"object_id": "data", "name": "data", "type": "Property"},
+                    {"object_id": "index", "name": "index", "type": "Property"},
+                    {"object_id": "feaisability", "name": "feaisability", "type": "Property"}]
+               
+            }
+        ]     
+        
+    }
+
+    servicepath_provision_response = requests.request('POST',url, json=data, headers=headers)
+    #print(servicepath_response.status_code)
+    #print(servicepath_response.text)
+    #provision EMG sensor
+   # url = 'http://iot-agent:4041/iot/devices'
+    url = 'http://localhost:4041/iot/devices'
+    headers = {
+        'Content-Type': 'application/json',
+        'fiware-service': 'openiot',
+        'fiware-servicepath': '/'
+    }
+    data = {
+        "devices": [
+            {
+                "device_id": "EMG1000",
+                "entity_name": "urn:ngsi-ld:sEMG:EMG1000",
+                "entity_type": "sEMG"
+            }
+        ]
+    }
+    sensor_provision_response = requests.post(url, json=data, headers=headers)
+    #print(sensor_response.status_code)
+    #print(sensor_response.text)
+    return servicepath_provision_response , sensor_provision_response
+
+'''
+                    {"object_id": "timeStamp", "name": "timeStamp", "type": "text"},
+                    {"object_id": "data", "name": "data", "type": "array"},
+                    {"object_id": "index", "name": "index", "type": "Integer"},
+                    {"object_id": "feaisability", "name": "feaisability", "type": "array"}
+'''

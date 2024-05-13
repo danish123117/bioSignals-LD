@@ -1,8 +1,8 @@
 import requests
 import json
 def ngsi_create_entity(d):#updates latest values
-    url = 'http://orion:1026/ngsi-ld/v1/entityOperations/create'
-
+    #url = 'http://orion:1026/ngsi-ld/v1/entityOperations/create'
+    url = 'http://localhost:1026/ngsi-ld/v1/entityOperations/create'
     headers = {
   'Content-Type': 'application/json',
   'Link': '<http://context:5051/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json", "Accept": "application/ld+json"'
@@ -29,7 +29,7 @@ def ngsi_create_trial_UC2():
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}
      }  
     d_emg = {
-    "id": "urn:ngsi-ld:sEMG:001",
+    "id": "urn:ngsi-ld:sEMG:EMG1000",
     "type": "sEMG",
     "timeStamp": {
       "type": "Property",
@@ -172,7 +172,7 @@ def ngsi_create_trial_UC1():
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}
      }  
     d_emg = {
-    "id": "urn:ngsi-ld:sEMG:001",
+    "id": "urn:ngsi-ld:sEMG:EMG1000",
     "type": "sEMG",
     "timeStamp": {
       "type": "Property",

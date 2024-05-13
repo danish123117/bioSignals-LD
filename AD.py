@@ -18,7 +18,7 @@ def anomaly_detector():
     time.sleep(5)
     while True:
         start_time = time.time()
-        data = v1.ngsi_get_historical('urn:ngsi-ld:sEMG:001',window_length)
+        data = v1.ngsi_get_historical('urn:ngsi-ld:sEMG:EMG1000',window_length)
         #if data ==0:     # case when the there is no data transmission
             # do something when error code is returned probably skip the code   
         

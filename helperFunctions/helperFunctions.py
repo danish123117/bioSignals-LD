@@ -2,7 +2,7 @@ import numpy as np
 import json
 import ast
 
-def data_to_np(data, key="values"):
+def data_to_np(data, key="data"):
     """
     The purpose of this function is to convert single attribute data list values 
     from string dataType to text dataType.
@@ -10,6 +10,7 @@ def data_to_np(data, key="values"):
     of multichannel EMG data when extracting features.
     """
    # data = json.loads(data)
+    print(data)
     parsed_data = data[key]
     intlist =[ast.literal_eval(string) for string in parsed_data]
    # print(parsed_data)

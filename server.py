@@ -29,7 +29,7 @@ def create_Trial():
         # add success message from trial name : Correct
        # return render_template('trial_fail.html')
     
-    servicepath_provision_response , sensor_provision_response = sensor_provision()
+    servicepath_provision_response , sensor_provision_response = sensor_provision_UC1()
     #if servicepath_provision_response.status_code !=200 or sensor_provision_response.status_code != 200: 
         # thete could be other return codes probably better to return something else instead which 
         # circumvents the issue of response codes where the entity/subscription already exists 
@@ -86,3 +86,6 @@ def download_trial_data():
 
 if __name__ == "__main__":
     serve(app, host= "0.0.0.0", port= 3002)
+
+
+# change port as environmental variable
