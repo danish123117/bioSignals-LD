@@ -140,6 +140,15 @@ services:
     ports:
       - '${CONTEXT_PORT}:${CONTEXT_PORT}'
 
+  application: 
+    image : danny0117/incode-heu-aa3-uc1:${APP_DOCKER_TAG}
+    hostname: application
+    container_name: application
+    expose: 
+      - '${APP_PORT}'
+    ports:
+      - '${APP_PORT}:${APP_PORT}'
+
   mongo-db:
     image: mongo:${MONGO_DB_VERSION}
     hostname: mongo-db
