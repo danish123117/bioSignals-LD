@@ -5,7 +5,7 @@ from ngsiOperations.ngsildOperations.ngsildCrudOperations import ngsi_get_curren
 import time 
 import numpy as np 
 
-broker_address = "127.0.0.1"
+broker_address = "mosquitto"
 broker_port = 1883
 topic = "json/danishabbas1/Robotstate"
 

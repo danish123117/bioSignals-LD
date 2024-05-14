@@ -11,10 +11,10 @@ services:
       - context
     networks:
       - default
-    expose: 
-      - "${ORION_LD_PORT}"
-    ports:
-      - "${ORION_LD_PORT}:${ORION_LD_PORT}"
+  #  expose: 
+  #    - "${ORION_LD_PORT}"
+  #  ports:
+  #    - "${ORION_LD_PORT}:${ORION_LD_PORT}"
     environment:
       - ORIONLD_TROE=TRUE
       - ORIONLD_TROE_USER=orion
@@ -23,7 +23,7 @@ services:
       - ORIONLD_MONGO_HOST=mongo-db
       - ORIONLD_MULTI_SERVICE=TRUE
       - ORIONLD_DISABLE_FILE_LOG=TRUE
-    command: -dbhost mongo-db -logLevel DEBUG -troePoolSize 10 -forwarding
+    command: -dbhost mongo-db -logLevel ERROR -troePoolSize 10 -forwarding
     healthcheck:
       test: curl --fail -s http://orion:${ORION_LD_PORT}/version || exit 1
       interval: 10s
@@ -43,10 +43,10 @@ services:
       - DATASOURCES_DEFAULT_MAXIMUM_POOL_SIZE=2
       - ENDPOINTS_INFO_ENABLED=true
       - ENDPOINTS_INFO_SENSITIVE=false
-    expose:
-      - "${MINTAKA_PORT}"
-    ports:
-      - "${MINTAKA_PORT}:${MINTAKA_PORT}"
+  #  expose:
+  #    - "${MINTAKA_PORT}"
+  #  ports:
+  #    - "${MINTAKA_PORT}:${MINTAKA_PORT}"
     networks:
       - default
 
@@ -65,10 +65,10 @@ services:
       - POSTGRES_PASSWORD=orion
       - POSTGRES_HOST_AUTH_METHOD=trust
     command: ["postgres", "-c", "log_statement=none"]
-    expose:
-      - "${TIMESCALE_PORT}"
-    ports:
-      - "${TIMESCALE_PORT}:${TIMESCALE_PORT}"
+  #  expose:
+  #    - "${TIMESCALE_PORT}"
+  #  ports:
+  #   - "${TIMESCALE_PORT}:${TIMESCALE_PORT}"
     networks:
       - default
     volumes:
@@ -84,10 +84,10 @@ services:
         - context
       networks:
         - default
-      expose:
-        - '{IOTA_NORTH_PORT}'
-      ports:
-        - '${IOTA_NORTH_PORT}:${IOTA_NORTH_PORT}' # localhost:4041
+  #    expose:
+   #     - '{IOTA_NORTH_PORT}'
+ #     ports:
+  #      - '${IOTA_NORTH_PORT}:${IOTA_NORTH_PORT}' # localhost:4041
       environment:
         - IOTA_CB_HOST=orion #
         - IOTA_CB_PORT=${ORION_LD_PORT} 
@@ -135,11 +135,11 @@ services:
     image: danny0117/incode-heu-contextfiles:${CONTEXT_DOCKER_TAG}
     hostname: context
     container_name: context
-    expose: 
-      - '${CONTEXT_PORT}'
-    ports:
-      - '${CONTEXT_PORT}:${CONTEXT_PORT}'
-
+#    expose: 
+#      - '${CONTEXT_PORT}'
+#    ports:
+#      - '${CONTEXT_PORT}:${CONTEXT_PORT}'
+#
   application: 
     image : danny0117/incode-heu-aa3-uc1:${APP_DOCKER_TAG}
     hostname: application
@@ -153,10 +153,10 @@ services:
     image: mongo:${MONGO_DB_VERSION}
     hostname: mongo-db
     container_name: db-mongo
-    expose:
-      - "${MONGO_DB_PORT}"
-    ports:
-      - "${MONGO_DB_PORT}:${MONGO_DB_PORT}" # localhost:27017
+  #  expose:
+  #    - "${MONGO_DB_PORT}"
+  #  ports:
+ #     - "${MONGO_DB_PORT}:${MONGO_DB_PORT}" # localhost:27017
     networks:
       - default
     volumes:
