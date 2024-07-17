@@ -26,7 +26,7 @@ def on_connect(client, userdata, flags, rc):
 def on_disconnect(client, userdata, rc):
     print("Disconnected from MQTT broker")
 
-def CEP_UC1(entityStress):
+def CEP_UC1(entityStress,orion,orion_port):
     time.sleep(5.2)
     indices = np.array([0, 1, 4, 5])
     #client = mqtt.Client()
@@ -40,7 +40,7 @@ def CEP_UC1(entityStress):
         while True:
             start_time = time.time()
             Rob_state = False 
-            stress_state = ngsi_get_current(entityStress)
+            stress_state = ngsi_get_current(entity=entityStress,orion=orion, orion_port=orion_port)
             #print(stress_state)
             mean = np.array(stress_state["meanFrequencyState"]['value'])[indices]
             median = np.array(stress_state["medianFrequencyState"]['value'])[indices]
@@ -51,7 +51,7 @@ def CEP_UC1(entityStress):
             payload = json.dumps(mqtt_payload(Rob_state))
             client.publish(topic, payload)
             remaining_time = 5 if not Rob_state else 5*60
-            remaining_time -= time.time() - start_time
+            remaining_time = time.time() - start_time
             if remaining_time > 0:
                 time.sleep(remaining_time)
     except KeyboardInterrupt:

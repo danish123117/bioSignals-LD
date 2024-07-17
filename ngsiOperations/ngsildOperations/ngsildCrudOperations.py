@@ -19,11 +19,11 @@ def stress_payload(frequency_median_norm, frequency_mean_norm, frequency_meanPow
      }
     return json.dumps(payload_raw)
 
-def ngsi_get_historical(entity, window_length=5000, url="mintaka:8080" , attribute = "data"):  # double check on EMG sensor entity what attribute reprements the signal values
+def ngsi_get_historical(entity,  mintaka, mintaka_port, window_length=5000, attribute = "data"):  # double check on EMG sensor entity what attribute reprements the signal values
     """
     The function queries historical data from TimescaleDB using mintaka API 
     """
-    url = f"http://{url}/temporal/entities/{entity}"
+    url = f"http://{mintaka}:{mintaka_port}/temporal/entities/{entity}"
     payload ={}
     headers = {
         'NGSILD-Tenant': 'openiot',
@@ -39,11 +39,11 @@ def ngsi_get_historical(entity, window_length=5000, url="mintaka:8080" , attribu
    # if response.status_code == 200:
     return response.json()
 
-def ngsi_patch(data,entity,url ="orion:1026"): # this is fine
+def ngsi_patch(data,entity,orion,orion_port): # this is fine
     """
     The function update the value on an NGSI-ld entity using patch to orion context broker
     """
-    url = f"http://{url}/ngsi-ld/v1/entities/{entity}/attrs"
+    url = f"http://{orion}:{orion_port}/ngsi-ld/v1/entities/{entity}/attrs"
     headers = {
         'Content-Type':"application/json",
         "Link": '<http://context:5051/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
@@ -51,8 +51,8 @@ def ngsi_patch(data,entity,url ="orion:1026"): # this is fine
     response = requests.request("PATCH", url, headers=headers, data=data)
     return response
 
-def ngsi_get_current(entity, url= "orion:1026",entity_type='Stress'): # this should be ok
-    url = f"http://{url}/ngsi-ld/v1/entities/{entity}"
+def ngsi_get_current(entity, orion,orion_port,entity_type='Stress'): # this should be ok
+    url = f"http://{orion}:{orion_port}/ngsi-ld/v1/entities/{entity}"
 
     payload = {}
     headers = {

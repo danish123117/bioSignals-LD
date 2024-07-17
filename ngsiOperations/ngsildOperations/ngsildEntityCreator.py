@@ -1,20 +1,21 @@
 import requests
 import json
-def ngsi_create_entity(d):#updates latest values
-    url = 'http://orion:1026/ngsi-ld/v1/entityOperations/create'
+def ngsi_create_entity(d,orion,orion_port,context,context_port=5051):#updates latest values
+    url = f'http://{orion}:{orion_port}/ngsi-ld/v1/entityOperations/create'
     #url = 'http://localhost:1026/ngsi-ld/v1/entityOperations/create'
     headers = {
   'Content-Type': 'application/json',
-  'Link': '<http://context:5051/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json", "Accept": "application/ld+json"'
+  'Link': f'<http://{context}:{context_port}/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json", "Accept": "application/ld+json"'
     }
 
     response = requests.request("POST", url, headers=headers, data=d)
     return response
  
-def ngsi_create_trial_UC2():
+def ngsi_create_trial_UC2(trial_name,orion,orion_port,context):
     d_stress = {
     "id": "urn:ngsi-ld:EmgFrequencyDomainFeatures:001",
     "type": "EmgFrequencyDomainFeatures",
+    "trialName":trial_name,
     "medianFrequencyState": {
       "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]},
@@ -31,6 +32,7 @@ def ngsi_create_trial_UC2():
     d_emg = {
     "id": "urn:ngsi-ld:sEMG:EMG1000",
     "type": "sEMG",
+    "trialName":trial_name,
     "timeStamp": {
       "type": "Property",
       "value": "132"
@@ -51,6 +53,7 @@ def ngsi_create_trial_UC2():
     d_ecg = {
     "id": "urn:ngsi-ld:PolarH10TopicECG:001",
     "type": "PolarH10TopicECG",
+    "trialName":trial_name,
     "clientId": {
       "type": "Property",
       "value": "0000"
@@ -84,6 +87,7 @@ def ngsi_create_trial_UC2():
     d_hr = {
     "id": "urn:ngsi-ld:PolarH10TopicHR:001",
     "type": "PolarH10TopicHR",
+    "trialName":trial_name,
     "clientId": {
       "type": "Property",
       "value": "0000"
@@ -121,6 +125,7 @@ def ngsi_create_trial_UC2():
     d_acc = {
     "id": "urn:ngsi-ld:PolarH10TopicACC:001",
     "type": "PolarH10TopicACC",
+    "trialName":trial_name,
     "clientId": {
       "type": "Property",
       "value": "0000"
@@ -151,13 +156,14 @@ def ngsi_create_trial_UC2():
       }
     }
     payload = json.dumps([d_stress,d_emg,d_acc,d_ecg,d_hr])
-    resp= ngsi_create_entity(payload)
+    resp= ngsi_create_entity(payload,orion,orion_port,context)
     return resp
 
-def ngsi_create_trial_UC1():
+def ngsi_create_trial_UC1(trial_name,orion,orion_port,context):
     d_stress = {
     "id": "urn:ngsi-ld:EmgFrequencyDomainFeatures:001",
     "type": "EmgFrequencyDomainFeatures",
+    "trialName":trial_name,
     "medianFrequencyState": {
       "type": "Property",
       "value": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]},
@@ -174,6 +180,7 @@ def ngsi_create_trial_UC1():
     d_emg = {
     "id": "urn:ngsi-ld:sEMG:EMG1000",
     "type": "sEMG",
+    "trialName":trial_name,
     "timeStamp": {
       "type": "Property",
       "value": "132"
@@ -192,7 +199,7 @@ def ngsi_create_trial_UC1():
     }
     payload = json.dumps([d_stress,d_emg])
 
-    resp= ngsi_create_entity(payload)
+    resp= ngsi_create_entity(payload,orion,orion_port,context)
     return resp
 
 #Done

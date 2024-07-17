@@ -1,8 +1,9 @@
 import requests
+ 
 
-def sensor_provision_UC2():
+def sensor_provision_UC2(iota_container_name,iota_container_port,orion, orion_port):
 # provision service path
-    url = 'http://iot-agent:4041/iot/services'
+    url = f'http://{iota_container_name}:{iota_container_port}/iot/services'
     headers = {
         'Content-Type': 'application/json',
         'fiware-service': 'openiot',
@@ -12,7 +13,7 @@ def sensor_provision_UC2():
         "services": [
             {
                 "apikey": "danishabbas1",
-                "cbroker": "http://orion:1026",
+                "cbroker": f"http://{orion}:{orion_port}",
                 "entity_type": "sEMG",
                 "resource": "",
                 "transport": "MQTT",
@@ -25,7 +26,7 @@ def sensor_provision_UC2():
             },
             {
                 "apikey": "danishabbas2",
-                "cbroker": "http://orion:1026",
+                "cbroker": f"http://{orion}:{orion_port}",
                 "entity_type": "PolarH10TopicECG",
                 "resource": "",
                 "transport": "MQTT",
@@ -44,7 +45,7 @@ def sensor_provision_UC2():
             },
             {
                 "apikey": "danishabbas2",
-                "cbroker": "http://orion:1026",
+                "cbroker": f"http://{orion}:{orion_port}",
                 "entity_type": "PolarH10TopicACC",
                 "resource": "",
                 "transport": "MQTT",
@@ -62,7 +63,7 @@ def sensor_provision_UC2():
             },
             {
                 "apikey": "danishabbas2",
-                "cbroker": "http://orion:1026",
+                "cbroker": f"http://{orion}:{orion_port}",
                 "entity_type": "PolarH10TopicHR",
                 "resource": "",
                 "transport": "MQTT",
@@ -84,11 +85,11 @@ def sensor_provision_UC2():
         ]
     }
 
-    servicepath_provision_response = requests.post(url, json=data, headers=headers)
+    servicepath_provision_response = requests.post(url, json=data, headers=headers, timeout=1)
     #print(servicepath_response.status_code)
     #print(servicepath_response.text)
     #provision EMG sensor
-    url = 'http://iot-agent:4041/iot/devices'
+    url = f'http://{iota_container_name}:{iota_container_port}/iot/devices'
     headers = {
         'Content-Type': 'application/json',
         'fiware-service': 'openiot',
@@ -163,14 +164,14 @@ def sensor_provision_UC2():
 
         ]
     }
-    sensor_provision_response = requests.post(url, json=data, headers=headers)
+    sensor_provision_response = requests.post(url, json=data, headers=headers, timeout=1)
     #print(sensor_response.status_code)
     #print(sensor_response.text)
     return servicepath_provision_response , sensor_provision_response
 
-def sensor_provision_UC1():
+def sensor_provision_UC1(iota_container_name,iota_container_port,orion, orion_port):
 # provision service path
-    url = 'http://iot-agent:4041/iot/services'
+    url = f'http://{iota_container_name}:{iota_container_port}/iot/services'
     #url = 'http://localhost:4041/iot/services'
     headers = {
         'Content-Type': 'application/json',
@@ -182,7 +183,7 @@ def sensor_provision_UC1():
         "services": [
             {
                 "apikey": "danishabbas1",
-                "cbroker": "http://orion:1026",
+                "cbroker": f"http://{orion}:{orion_port}",
                 "entity_type": "sEMG",
                 "resource": "",
                 "transport": "MQTT",
@@ -197,11 +198,11 @@ def sensor_provision_UC1():
         
     }
 
-    servicepath_provision_response = requests.request('POST',url, json=data, headers=headers)
+    servicepath_provision_response = requests.request('POST',url, json=data, headers=headers , timeout=1)
     #print(servicepath_response.status_code)
     #print(servicepath_response.text)
     #provision EMG sensor
-    url = 'http://iot-agent:4041/iot/devices'
+    url = f'http://{iota_container_name}:{iota_container_port}/iot/devices'
     #url = 'http://localhost:4041/iot/devices'
     headers = {
         'Content-Type': 'application/json', # 
@@ -222,14 +223,23 @@ def sensor_provision_UC1():
             }
         ]
     }
-    sensor_provision_response = requests.post(url, json=data, headers=headers)
+    sensor_provision_response = requests.post(url, json=data, headers=headers, timeout=1)
     #print(sensor_response.status_code)
     #print(sensor_response.text)
     return servicepath_provision_response , sensor_provision_response
 
-'''
-                    {"object_id": "timeStamp", "name": "timeStamp", "type": "text"},
-                    {"object_id": "data", "name": "data", "type": "array"},
-                    {"object_id": "index", "name": "index", "type": "Integer"},
-                    {"object_id": "feaisability", "name": "feaisability", "type": "array"}
-'''
+def sensor_prov_kill(device_id,api_key,iota_container_name,iota_container_port ): 
+    # kill sensor provision
+    url_s = f"http://{iota_container_name}:{iota_container_port}/iot/devices/{device_id}"
+    url_p = f"http://{iota_container_name}:{iota_container_port}/iot/services/?resource=&apikey={api_key}"
+    payload = ""
+    headers = {
+    'Content-Type': 'application/json',
+    'fiware-service': 'openiot',
+    'fiware-servicepath': '/'
+    }
+    response_s = requests.request("DELETE", url_s, headers=headers, data=payload)
+      
+    response_p = requests.request("DELETE", url_p, headers=headers, data=payload)
+
+    return response_s, response_p
