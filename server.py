@@ -97,12 +97,12 @@ def download_trial_data():
     print('this downloads the data of a trial')
 
 @app.route('/detachsensors')
-def download_trial_data():
+def download_trial_data_2():
     print('this downloads the data of a trial')
     
 
 if __name__ == "__main__":
-    serve(app, host= "0.0.0.0", port= 3003)
+    serve(app, host= "0.0.0.0", port= 3002)
 
 
 # change port as environmental variable

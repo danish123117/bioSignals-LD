@@ -4,10 +4,8 @@
     box-sizing: border-box;
 }
 
-body {
+.main {
     padding: 2rem;
-    background-color: #333;
-    color: whitesmoke;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -20,4 +18,38 @@ input, button {
     font-size: 2rem;
     padding: 1rem;
     border-radius: 10px;
+}
+
+.header {
+    background-color: #b3e5e5;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .logo {
+    height: 50px;
+    width: auto; /* Maintain aspect ratio */
+}
+
+.header h1 {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    font-family: Arial, sans-serif; /* Ensure consistent font */
+}
+
+.content {
+    padding: 20px;
+}
+
+.content h2 {
+    font-size: 24px;
+    color: #000;
+}
+
+.content p {
+    font-size: 16px;
+    color: #000;
 }

@@ -8,6 +8,15 @@
 
 </head>
 <body>
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/INCODE_logo.png') }}" alt="INCODE Logo" class="logo" >
+        <h1>Healthy Operator Platform</h1>
+        <div class="logos">
+            <img src="{{ url_for('static', filename='images/polimi_logo.png') }}" alt="Politecnico di Milano Logo" class="logo">
+            <img src="{{ url_for('static', filename='images/made_logo.png') }}" alt="MADE Competence Center Logo" class="logo">
+        </div>
+    </div>
+    <div class="main">
     <h1> Trial name</h1>
     <form action = "/setup">
         <input type="text" name="trial_name" id="trial_name" placeholder="Enter trial name" />
@@ -17,6 +26,6 @@
     <form action = "/historypage">
         <button type = "submit">View trial history </button>
     </form>
-    
+    </div>
 </body>
 </html>
