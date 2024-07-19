@@ -8,8 +8,10 @@ from waitress import serve
 import threading
 import queue
 import os
-#client = None
-#client_queue = queue.Queue()
+
+stop_thread_event_AD = threading.Event()
+stop_thread_event_CEP = threading.Event()
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -21,72 +23,57 @@ def index():
 @app.route('/setup')
 
 def create_Trial():
-    # could add health check as a route to render failure message
     trial_name = request.args.get("trial_name")
-    # this could create potential issues in subscriptions
-    
-    #if resp_stress.status_code !=200 or resp_sensor.status_code != 200: 
-        #add parameters for response code and messsage related to failure mode 
-        # add success message from trial name : Correct
-       # return render_template('trial_fail.html')
     iota_container_name= os.getenv("IOTA_CONTAINER_NAME")
     iota_container_port = os.getenv("IOTA_CONTAINER_PORT")
     orion = os.getenv("ORION_NAME")
     orion_port = os.getenv("ORION_PORT")
     context = os.getenv("CONTEXT_CONTAINER_NAME")
     resp_entities_create  = ngsi_create_trial_UC1(trial_name,orion,orion_port,context)
-    
+   
     servicepath_provision_response , sensor_provision_response = sensor_provision_UC1(iota_container_name,iota_container_port,orion, orion_port)
-    #if servicepath_provision_response.status_code !=200 or sensor_provision_response.status_code != 200: 
-        # thete could be other return codes probably better to return something else instead which 
-        # circumvents the issue of response codes where the entity/subscription already exists 
-        # case for sensor provision 
-        #return render_template('trial_fail.html')
-    
- #  subscription_sensor_response, subscription_stress_response = createSubscriptions(trial_name) 
-    #if subscription_sensor_response.status_code !=200 or subscription_stress_response.status_code != 200: 
-        # some parameters for the response codes
-        #return render_template('trial_fail.html')
-    
+  
     return render_template(
         '2_run_AD.html',
         entity_create_code= resp_entities_create.status_code,
-        #entity_create_message=resp_entities_create.text,
         prov_servicepath_status=servicepath_provision_response.status_code ,
-        #prov_servicepath_message=servicepath_provision_response.text ,
         prov_sensor_status=sensor_provision_response.status_code,
-        #prov_sensor_message =sensor_provision_response.text,
              
                            )
 @app.route('/runAD')
 def run_AD():
-    #anomaly_detector(sensor_entity,stress_entity)
-    client_thread_1 = threading.Thread(target=anomaly_detector_thread)
+    global stop_thread_event_AD
+    stop_thread_event_AD.clear()
+    client_thread_1 = threading.Thread(target=anomaly_detector_thread, args=(stop_thread_event_AD,))
     client_thread_1.start()
-# how to do this becauee client wont be returned unless you stop the trial
-    return render_template('CEP.html' )
-def anomaly_detector_thread():
+    return render_template('CEP.html')
+def anomaly_detector_thread(stop_thread_AD):
     orion = os.getenv("ORION_NAME")
     orion_port = os.getenv("ORION_PORT")
     mintaka= os.getenv("MINTAKA_NAME")
     mintaka_port= os.getenv("MINTAKA_PORT")
-    anomaly_detector(orion,orion_port,mintaka,mintaka_port)
+    anomaly_detector(orion,orion_port,mintaka,mintaka_port,stop_thread_AD)
 
 @app.route('/runCEP')
 def run_CEP():
-    client_thread_2 = threading.Thread(target=CEP_UC1_thread, args=("urn:ngsi-ld:EmgFrequencyDomainFeatures:001",))
+    global stop_thread_event_CEP
+    stop_thread_event_CEP.clear()
+    client_thread_2 = threading.Thread(target=CEP_UC1_thread, args=("urn:ngsi-ld:EmgFrequencyDomainFeatures:001",stop_thread_event_CEP,))
     client_thread_2.start()
     return render_template('3_stop_trial.html' )
-def CEP_UC1_thread(entityStress):
+def CEP_UC1_thread(entityStress,stop_thread_CEP):
     orion = os.getenv("ORION_NAME")
     orion_port = os.getenv("ORION_PORT")
-    CEP_UC1(entityStress=entityStress,orion=orion,orion_port=orion_port)
+    CEP_UC1(entityStress=entityStress,orion=orion,orion_port=orion_port,stop_thread_CEP=stop_thread_CEP)
 
 @app.route('/stop')
 def stop():
+    global stop_thread_event_AD
+    global stop_thread_event_CEP
+    stop_thread_event_CEP.set()
+    stop_thread_event_AD.set()
     ret = sensor_prov_kill(device_id='EMG100',api_key='danishabbas1')
     return render_template('index.html')
-# something to get data from previus trials this button should be availible on Index 
 
 @app.route('/historypage')
 def go_to_history():
@@ -105,4 +92,3 @@ if __name__ == "__main__":
     serve(app, host= "0.0.0.0", port= 3002)
 
 
-# change port as environmental variable

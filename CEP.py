@@ -26,7 +26,7 @@ def on_connect(client, userdata, flags, rc):
 def on_disconnect(client, userdata, rc):
     print("Disconnected from MQTT broker")
 
-def CEP_UC1(entityStress,orion,orion_port):
+def CEP_UC1(entityStress,orion,orion_port,stop_thread_CEP):
     time.sleep(5.2)
     indices = np.array([0, 1, 4, 5])
     #client = mqtt.Client()
@@ -37,7 +37,7 @@ def CEP_UC1(entityStress,orion,orion_port):
     client.loop_start()
 
     try:
-        while True:
+        while not stop_thread_CEP.is_set():
             start_time = time.time()
             Rob_state = False 
             stress_state = ngsi_get_current(entity=entityStress,orion=orion, orion_port=orion_port)
@@ -55,7 +55,6 @@ def CEP_UC1(entityStress,orion,orion_port):
             if remaining_time > 0:
                 time.sleep(remaining_time)
     except KeyboardInterrupt:
-        # Handle keyboard interrupt (Ctrl+C) to gracefully disconnect from MQTT broker
         print("Disconnecting from MQTT broker")
         client.disconnect()
         client.loop_stop()

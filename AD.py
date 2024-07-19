@@ -7,7 +7,7 @@ import helperFunctions.helperFunctions as hp
 import bioTools.emgTools as emg
 
 
-def anomaly_detector(orion,orion_port,mintaka,mintaka_port):
+def anomaly_detector(orion,orion_port,mintaka,mintaka_port,stop_thread_AD):
     '''The looped part has an execution time of ~0.065 seconds'''
     window_length = 5000
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -16,7 +16,7 @@ def anomaly_detector(orion,orion_port,mintaka,mintaka_port):
         parms = json.load(json_file)
       
     time.sleep(5)
-    while True:
+    while not stop_thread_AD.is_set():
         start_time = time.time()
         data = v1.ngsi_get_historical(entity='urn:ngsi-ld:sEMG:EMG1000',window_length=window_length,mintaka=mintaka,mintaka_port=mintaka_port)
         #if data ==0:     # case when the there is no data transmission

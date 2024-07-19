@@ -6,12 +6,27 @@
 
 .main {
     padding: 2rem;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    background: #edf2f7;
+    align-items: left;
     gap: 2rem;
     font-size: 2rem;
+    width: 50%;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+.main2 {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    background: #edf2f7;
+    align-items: left;
+    gap: 2rem;
+    font-size: 2rem;
+    width: 50%;
+    border-radius: 1rem;
 }
 
 input, button {
@@ -20,24 +35,34 @@ input, button {
     border-radius: 10px;
 }
 
+button {
+    cursor: pointer;
+    background: #F8F8F8;
+}
+
+button:hover {
+    background: #F0F0F0;
+}
+
 .header {
     background-color: #b3e5e5;
     padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .header .logo {
     height: 50px;
-    width: auto; /* Maintain aspect ratio */
+    width: auto; 
 }
 
 .header h1 {
     flex: 1;
     text-align: center;
     margin: 0;
-    font-family: Arial, sans-serif; /* Ensure consistent font */
+    font-family: Arial, sans-serif; 
 }
 
 .content {
@@ -53,3 +78,4 @@ input, button {
     font-size: 16px;
     color: #000;
 }
+
