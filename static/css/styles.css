@@ -11,22 +11,29 @@
     background: #edf2f7;
     align-items: left;
     gap: 2rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     width: 50%;
     border-radius: 1rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
+    border: 2px solid #eee;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 3px rgba(255, 255, 255, 0.8);
 }
 
-.main2 {
+.main2  {
     padding: 2rem;
     display: flex;
     flex-direction: column;
     background: #edf2f7;
     align-items: left;
     gap: 2rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     width: 50%;
     border-radius: 1rem;
+    border: 2px solid #eee;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 3px rgba(255, 255, 255, 0.8);
 }
 
 input, button {
@@ -58,11 +65,20 @@ button:hover {
     width: auto; 
 }
 
-.header h1 {
+.header {
     flex: 1;
     text-align: center;
     margin: 0;
     font-family: Arial, sans-serif; 
+
+}
+
+h1 {
+    flex: 1;
+    text-align: left;
+    margin: 0;
+    font-family: Arial, sans-serif; 
+
 }
 
 .content {
