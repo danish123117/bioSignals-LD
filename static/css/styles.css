@@ -4,12 +4,23 @@
     box-sizing: border-box;
 }
 
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
 .main {
     padding: 2rem;
     display: flex;
     flex-direction: column;
     background: #edf2f7;
-    align-items: left;
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center;
+    place-items: center;
     gap: 2rem;
     font-size: 1.5rem;
     width: 50%;
@@ -26,7 +37,11 @@
     display: flex;
     flex-direction: column;
     background: #edf2f7;
-    align-items: left;
+    place-items: center;;
+    align-items: center;
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center;
     gap: 2rem;
     font-size: 1.5rem;
     width: 50%;
@@ -58,19 +73,15 @@ button:hover {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 2rem;
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    font-family: Arial, sans-serif; 
 }
 
 .header .logo {
     height: 50px;
     width: auto; 
-}
-
-.header {
-    flex: 1;
-    text-align: center;
-    margin: 0;
-    font-family: Arial, sans-serif; 
-
 }
 
 h1 {
@@ -95,3 +106,11 @@ h1 {
     color: #000;
 }
 
+.ok {
+    color: green;
+    font-weight: bold;
+}
+.failed {
+    color: red;
+    font-weight: bold;
+}

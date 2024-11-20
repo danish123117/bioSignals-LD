@@ -17,18 +17,20 @@
             <img src="{{ url_for('static', filename='images/made_logo.png') }}" alt="MADE Competence Center Logo" class="logo">
         </div>
     </div>
-    <div class="main">
-    <h1> Trial name</h1>
-    <form action = "/setup">
-        <input type="text" name="trial_name" id="trial_name" placeholder="Enter trial name" />
-         <button class="button1" type = "submit">Start Trial </button>
-    </form>
-    </div>
-    <div class="main2">
-    <h1>Historical Trial Data</h1>
-    <form action = "/historypage">
-        <button class="button2" type = "submit">View trial history </button>
-    </form>
+    <div class="container">
+        <div class="main">
+            <h1> Trial name</h1>
+            <form action = "/setup">
+                <input type="text" name="trial_name" id="trial_name" placeholder="Enter trial name" />
+                <button class="button1" type = "submit">Start Trial </button>
+            </form>
+        </div>
+        <div class="main">
+            <h1>Historical Trial Data</h1>
+            <form action = "/historypage">
+                <button class="button2" type = "submit">View trial history </button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

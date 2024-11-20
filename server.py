@@ -29,15 +29,31 @@ def create_Trial():
     orion = os.getenv("ORION_NAME")
     orion_port = os.getenv("ORION_PORT")
     context = os.getenv("CONTEXT_CONTAINER_NAME")
+    
     resp_entities_create  = ngsi_create_trial_UC1(trial_name,orion,orion_port,context)
-   
+    
+    if resp_entities_create.status_code==201:
+        entity_status ="OK!"
+    else: 
+        entity_status = "Failed!"
+
     servicepath_provision_response , sensor_provision_response = sensor_provision_UC1(iota_container_name,iota_container_port,orion, orion_port)
-  
+    
+    if servicepath_provision_response.status_code==201:
+        servicepath_status ="OK!"
+    else: 
+        servicepath_status = "Failed!"
+    
+    if sensor_provision_response.status_code==201:
+        sensor_provision_status ="OK!"
+    else: 
+        sensor_provision_status = "Failed!"
+    
     return render_template(
         '2_run_AD.html',
-        entity_create_code= resp_entities_create.status_code,
-        prov_servicepath_status=servicepath_provision_response.status_code ,
-        prov_sensor_status=sensor_provision_response.status_code,
+        entity_create_code= entity_status,
+        prov_servicepath_status= servicepath_status,
+        prov_sensor_status= sensor_provision_status,
              
                            )
 @app.route('/runAD')

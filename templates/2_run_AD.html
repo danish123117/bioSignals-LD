@@ -4,26 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthy Operator Platform</title>
-    <link href=" {{url_for('static', filename = 'css/styles.css')}}" rel ='stylesheet'/>
-
+   <link href=" {{url_for('static', filename = 'css/styles.css')}}" rel ='stylesheet'/>   
+<!--     <link href="styles.css" rel ='stylesheet'/> --> 
 </head>
 <body>
-    <h1> Trial initialisation status</h1>
-    <h2>Entity Creation Status </h2>
-    <p>Trial entity creation status :{{entity_create_code}}</p>
-    <h2>Sensor Provision status</h2>
-    <p>Fiware Service path: {{servicepath_status}} :  <br>
-        Sensor Provision: {{sensor_status}} :  
-    </p>
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/INCODE_logo.png') }}" alt="INCODE Logo" class="logo" >
+        <h1>Healthy Operator Platform</h1>
+        <div class="logos">
+            <img src="{{ url_for('static', filename='images/polimi_logo.png') }}" alt="Politecnico di Milano Logo" class="logo">
+            <img src="{{ url_for('static', filename='images/made_logo.png') }}" alt="MADE Competence Center Logo" class="logo">
+        </div>
+    </div>
+    <div class="container">
+        <div class="main">
+            <h1> Trial initialisation status</h1>
+            <h2>Entity Creation Status </h2>
+            <p>Trial entity creation status :<span class="{% if entity_create_code == 'OK!' %}ok{% else %}failed{% endif %}">{{entity_create_code}}</span> </p>
+            <h2>Sensor Provision status</h2>
+            <p>Fiware Service path: <span class="{% if prov_servicepath_status == 'OK!' %}ok{% else %}failed{% endif %}">{{prov_servicepath_status}}</span>   <br>
+                Sensor Provision: <span class="{% if prov_sensor_status == 'OK!' %}ok{% else %}failed{% endif %}">{{ prov_sensor_status }}</span>  
+            </p>          
+            
+        </div>
+        <div class="main">
+            <form action = '/runAD'>
+                <button type = "submit">Start Anomaly detector</button>
+            </form>
+            <form action = '/setup'>
+                <input type = "text" name = "trial name" id = "trial name" placeholder="Re-Enter Trial Name"/>
+                <button type = "submit">Create new trial </button>
+            </form>
+        </div>
+    </div>
 
-    <form action = '/runAD'>
-        <button type = "submit">Start Anomaly detector</button>
-    </form>
 
-    <form action = '/setup'>
-        <input type = "text" name = "trial name" id = "trial name" placeholder="Re-Enter Trial Name"/>
-        <button type = "submit">Create new trial </button>
-    </form>
-    
 </body>
 </html>
