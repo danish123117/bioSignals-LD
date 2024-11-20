@@ -25,7 +25,25 @@
             <p>Fiware Service path: <span class="{% if prov_servicepath_status == 'OK!' %}ok{% else %}failed{% endif %}">{{prov_servicepath_status}}</span>   <br>
                 Sensor Provision: <span class="{% if prov_sensor_status == 'OK!' %}ok{% else %}failed{% endif %}">{{ prov_sensor_status }}</span>  
             </p>          
-            
+        </div>
+        <!-- Real-Time EMG Values -->
+        <div class="main">
+            <h2>Real-Time EMG Values</h2>
+            <p>
+                <label>
+                    <input type="checkbox" id="toggleUpdates"> Enable Real-Time Updates
+                </label>
+            </p>
+            <div id="emgValues">
+                <p>EMG 1: <span id="emg1">---</span></p>
+                <p>EMG 2: <span id="emg2">---</span></p>
+                <p>EMG 3: <span id="emg3">---</span></p>
+                <p>EMG 4: <span id="emg4">---</span></p>
+                <p>EMG 5: <span id="emg5">---</span></p>
+                <p>EMG 6: <span id="emg6">---</span></p>
+                <p>EMG 7: <span id="emg7">---</span></p>
+                <p>EMG 8: <span id="emg8">---</span></p>
+            </div>
         </div>
         <div class="main">
             <form action = '/runAD'>
@@ -37,7 +55,37 @@
             </form>
         </div>
     </div>
+    <script>
+        let updateInterval = null;
 
+        document.getElementById("toggleUpdates").addEventListener("change", function() {
+            if (this.checked) {
+                // Start polling
+                updateInterval = setInterval(fetchEMGData, 1000);
+            } else {
+                // Stop polling
+                clearInterval(updateInterval);
+                updateInterval = null;
+            }
+        });
+
+        function fetchEMGData() {
+            fetch('/get_emg_data')
+                .then(response => response.json())
+                .then(data => {
+                    const values = data.data;
+                    for (let i = 0; i < values.length; i++) {
+                        document.getElementById(`emg${i + 1}`).textContent = values[i];
+                    }
+                })
+                .catch(() => {
+                    // On error, set values to "---"
+                    for (let i = 1; i <= 8; i++) {
+                        document.getElementById(`emg${i}`).textContent = "---";
+                    }
+                });
+        }
+    </script>
 
 </body>
 </html>

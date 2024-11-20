@@ -1,4 +1,4 @@
-from flask import Flask , render_template, request
+from flask import Flask , render_template, request, jsonify
 from ngsiOperations.ngsildOperations.ngsildEntityCreator import*
 from ngsiOperations.ngsildOperations.ngsildSensorProvision import*
 #from ngsiOperations.ngsildOperations.ngsildSubscriptions import createSubscriptions
@@ -90,6 +90,31 @@ def stop():
     stop_thread_event_AD.set()
     ret = sensor_prov_kill(device_id='EMG100',api_key='danishabbas1')
     return render_template('index.html')
+
+from flask import jsonify
+
+@app.route('/get_emg_data', methods=['GET'])
+def get_emg_data():
+   
+    orion = os.getenv("ORION_NAME")
+    orion_port = os.getenv("ORION_PORT")
+    entity_id = "urn:ngsi-ld:sEMG:EMG1000"
+    url = f"http://{orion}:{orion_port}/ngsi-ld/v1/entities/{entity_id}"
+    payload = {}
+    headers = {
+  'Link': '<http://context:5051/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
+  'Fiware-service': 'openiot',
+  'servicepath': '/'
+    }
+    try:
+        response = requests.get(url, headers=headers, data=payload)
+        response.raise_for_status()
+        entity_data = response.json()
+        data_values = entity_data.get('data', {}).get('value', ["---"] * 8)  # Default to "---" if unavailable
+    except Exception:
+        data_values = ["---"] * 8  
+
+    return jsonify({"data": data_values})
 
 @app.route('/historypage')
 def go_to_history():

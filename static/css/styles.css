@@ -114,3 +114,11 @@ h1 {
     color: red;
     font-weight: bold;
 }
+
+#emgValues p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+#toggleUpdates {
+    margin-bottom: 10px;
+}

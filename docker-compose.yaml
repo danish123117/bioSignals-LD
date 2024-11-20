@@ -159,7 +159,7 @@ services:
       - default
 
   application: 
-    image : danny0117/incode-heu-aa3-uc1:1.0.8
+    image : danny0117/incode-heu-aa3-uc1:1.0.9
     hostname: application
     container_name: application
     expose:
