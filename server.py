@@ -29,15 +29,15 @@ def create_Trial():
     orion = os.getenv("ORION_NAME")
     orion_port = os.getenv("ORION_PORT")
     context = os.getenv("CONTEXT_CONTAINER_NAME")
-    
-    resp_entities_create  = ngsi_create_trial_UC1(trial_name,orion,orion_port,context)
+    context_port = os.getenv("CONTEXT_PORT")
+    resp_entities_create  = ngsi_create_trial_UC1(trial_name,orion,orion_port,context,context_port=context_port)
     
     if resp_entities_create.status_code==201:
         entity_status ="OK!"
     else: 
         entity_status = "Failed!"
 
-    servicepath_provision_response , sensor_provision_response = sensor_provision_UC1(iota_container_name,iota_container_port,orion, orion_port)
+    servicepath_provision_response , sensor_provision_response = sensor_provision_UC1(iota_container_name,iota_container_port,orion, orion_port) ##
     
     if servicepath_provision_response.status_code==201:
         servicepath_status ="OK!"
@@ -91,18 +91,17 @@ def stop():
     ret = sensor_prov_kill(device_id='EMG100',api_key='danishabbas1')
     return render_template('index.html')
 
-from flask import jsonify
-
 @app.route('/get_emg_data', methods=['GET'])
 def get_emg_data():
-   
+    context = os.getenv("CONTEXT_CONTAINER_NAME")
+    context_port = os.getenv("CONTEXT_PORT")  
     orion = os.getenv("ORION_NAME")
     orion_port = os.getenv("ORION_PORT")
     entity_id = "urn:ngsi-ld:sEMG:EMG1000"
     url = f"http://{orion}:{orion_port}/ngsi-ld/v1/entities/{entity_id}"
     payload = {}
     headers = {
-  'Link': '<http://context:5051/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
+  'Link': f'<http://{context}:{context_port}/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
   'Fiware-service': 'openiot',
   'servicepath': '/'
     }

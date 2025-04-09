@@ -11,7 +11,7 @@ def ngsi_create_entity(d,orion,orion_port,context,context_port=5051):#updates la
     response = requests.request("POST", url, headers=headers, data=d)
     return response
  
-def ngsi_create_trial_UC2(trial_name,orion,orion_port,context):
+def ngsi_create_trial_UC2(trial_name,orion,orion_port,context,context_port):
     d_stress = {
     "id": "urn:ngsi-ld:EmgFrequencyDomainFeatures:001",
     "type": "EmgFrequencyDomainFeatures",
@@ -159,7 +159,7 @@ def ngsi_create_trial_UC2(trial_name,orion,orion_port,context):
     resp= ngsi_create_entity(payload,orion,orion_port,context)
     return resp
 
-def ngsi_create_trial_UC1(trial_name,orion,orion_port,context):
+def ngsi_create_trial_UC1(trial_name,orion,orion_port,context,context_port):
     d_stress = {
     "id": "urn:ngsi-ld:EmgFrequencyDomainFeatures:001",
     "type": "EmgFrequencyDomainFeatures",
@@ -199,7 +199,7 @@ def ngsi_create_trial_UC1(trial_name,orion,orion_port,context):
     }
     payload = json.dumps([d_stress,d_emg])
 
-    resp= ngsi_create_entity(payload,orion,orion_port,context)
+    resp= ngsi_create_entity(payload,orion,orion_port,context,context_port)
     return resp
 
 #Done

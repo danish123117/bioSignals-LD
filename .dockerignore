@@ -11,3 +11,6 @@ __pycache__
 docker-compose.yml
 *.cofig
 mosquitto
+.gitignore
+mosquitto/
+mosquitto.conf

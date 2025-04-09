@@ -9,7 +9,7 @@ def timeDomainFeatures(rr_list):
     hrv_tdf ={}
     rr_list_np = np.array(rr_list) # this results in order of magnitude difference in processing times 
     meanRR = np.mean(rr_list_np) #1
-    hrv_tdf['meanRR']
+    hrv_tdf['meanRR'] =meanRR
     meanHR = 60000/meanRR #2
     hrv_tdf['meanHR']= meanHR
     SDNN = np.std(rr_list_np, ddof=1)#3 # N-1 in denominator so ddof =1, we treat the readings as a sample
