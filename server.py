@@ -8,7 +8,7 @@ from waitress import serve
 import threading
 import queue
 import os
-
+#none
 stop_thread_event_AD = threading.Event()
 stop_thread_event_CEP = threading.Event()
 
