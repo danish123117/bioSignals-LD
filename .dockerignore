@@ -1,0 +1,16 @@
+__pycache__
+.venv/
+.env
+*.pyc
+*.pyo
+*.pyd
+.vscode/
+.idea/
+.DS_Store
+*.log
+docker-compose.yaml
+*.cofig
+mosquitto
+.gitignore
+mosquitto/
+mosquitto.conf

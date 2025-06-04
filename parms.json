@@ -1,0 +1,10 @@
+{
+    "medianFrequency":{"ch1": 100,"ch2":101 ,"ch3": 102,"ch4":103,"ch5":104 ,"ch6":105},
+    
+    "meanFrequency":{"ch1": 100,"ch2":101 ,"ch3": 102,"ch4":103,"ch5":104 ,"ch6":105},
+    
+    "meanPowerFrequency": {"ch1": 100,"ch2":101 ,"ch3": 102,"ch4":103,"ch5":104 ,"ch6":105},
+
+    "zeroCrossingFrequency": {"ch1": 100,"ch2":101 ,"ch3": 102,"ch4":103,"ch5":104 ,"ch6":105}
+    
+    }
