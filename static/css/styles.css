@@ -179,3 +179,13 @@ input:checked + .slider:before {
 #OP-State.processing {
     color: orange;
 }
+
+.ok {
+    color: green;
+}
+.failed {
+    color: red;
+}
+.processing {
+    color: orange;
+}

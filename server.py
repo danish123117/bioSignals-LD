@@ -36,7 +36,7 @@ app = Flask(__name__)
 def mqtt_payload(Rob_state):
     current_time = time.strftime("%Y-%m-%dT%H:%M:%S.", time.localtime()) + '{:03d}'.format(int(round(time.time() * 1000)) % 1000)
     payload = {
-        "timeStamp": current_time,
+        "ts": current_time,
         "automatic": Rob_state
     }
     return payload
@@ -166,7 +166,7 @@ def send_robot_state():
         cumulative = (pow + mean) / 2
 
         Rob_state = not np.any(cumulative > 1)
-
+        print(f"Robot state: {Rob_state}")
         payload = json.dumps(mqtt_payload(Rob_state))
 
         client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)

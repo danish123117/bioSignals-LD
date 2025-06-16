@@ -165,38 +165,9 @@ def sensor_provision_UC2(iota_container_name,iota_container_port,orion, orion_po
         ]
     }
     sensor_provision_response = requests.post(url, json=data, headers=headers)
-    #print(sensor_response.status_code)
-    #print(sensor_response.text)
     return servicepath_provision_response , sensor_provision_response
 
 def sensor_provision_UC1(iota_container_name,iota_container_port,orion, orion_port):
-
-    url = f'http://{iota_container_name}:{iota_container_port}/iot/devices'
-    headers = {
-        'Content-Type': 'application/json',  
-        'fiware-service': 'openiot', 
-        'fiware-servicepath': '/'    
-    }
-    data = {
-        "devices": [
-            {
-                "device_id": "EMG1000",
-                "entity_name": "urn:ngsi-ld:sEMG:EMG1000",
-                "entity_type": "sEMG",
-                "attributes": [
-                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
-                    {"object_id": "data", "name": "data", "type": "Property"},
-                    {"object_id": "index", "name": "index", "type": "Property"},
-                    {"object_id": "feaisability", "name": "feaisability", "type": "Property"}]
-            }
-        ]
-    }
-    sensor_provision_response = requests.post(url, json=data, headers=headers)
-    #print(sensor_response.status_code)
-    #print(sensor_response.text)
-    # provision service path
-    #url = 'http://iot-agent:4041/iot/services'
-    #url = 'http://localhost:4041/iot/services'
     url = f'http://{iota_container_name}:{iota_container_port}/iot/services'
     headers = {
         'Content-Type': 'application/json',
@@ -225,6 +196,28 @@ def sensor_provision_UC1(iota_container_name,iota_container_port,orion, orion_po
     }
 
     servicepath_provision_response = requests.post(url, json=data, headers=headers)
+    url = f'http://{iota_container_name}:{iota_container_port}/iot/devices'
+    headers = {
+        'Content-Type': 'application/json',  
+        'fiware-service': 'openiot', 
+        'fiware-servicepath': '/'    
+    }
+    data = {
+        "devices": [
+            {
+                "device_id": "EMG1000",
+                "entity_name": "urn:ngsi-ld:sEMG:EMG1000",
+                "entity_type": "sEMG",
+                "attributes": [
+                    {"object_id": "timeStamp", "name": "timeStamp", "type": "Property"},
+                    {"object_id": "data", "name": "data", "type": "Property"},
+                    {"object_id": "index", "name": "index", "type": "Property"},
+                    {"object_id": "feaisability", "name": "feaisability", "type": "Property"}]
+            }
+        ]
+    }
+    sensor_provision_response = requests.post(url, json=data, headers=headers)
+
     
     return servicepath_provision_response , sensor_provision_response
 

@@ -8,10 +8,6 @@ const toggleCobotState = document.getElementById("start_CEP");
 const opState = document.getElementById("OP-State");
 const cobotModeDisplay = document.getElementById("Cobot-Mode");
 
-// Initialize status displays
-opState.className = "status";
-cobotModeDisplay.className = "status";
-
 // Real-Time EMG Data Toggle
 toggleRawUpdates.addEventListener("change", function () {
     if (this.checked) {
@@ -19,43 +15,27 @@ toggleRawUpdates.addEventListener("change", function () {
     } else {
         clearInterval(updateIntervalRaw);
         updateIntervalRaw = null;
-        // Clear EMG displays when turned off
-        for (let i = 1; i <= 6; i++) {
-            document.getElementById(`emg${i}`).textContent = "---";
-        }
     }
 });
 
 // Fatigue Detector Toggle
 toggleFatigueState.addEventListener("change", function () {
     if (this.checked) {
-        updateIntervalFatigue = setInterval(processEMGdata, 5000);
-        // Immediate first update
-        processEMGdata();
+        updateIntervalFatigue = setInterval(processEMGdata, 5000); // every 5 seconds
     } else {
         clearInterval(updateIntervalFatigue);
         updateIntervalFatigue = null;
-        opState.textContent = "---";
-        opState.className = "status";
     }
 });
 
-// Cobot Mode Toggle - Updated to fix the toggle issue
+// Cobot Mode Toggle
 toggleCobotState.addEventListener("change", function () {
     if (this.checked) {
-        startCobotMonitor();
-        // Immediate first update
-        updateCobotMode();
+        startCobotMonitor(); // Start polling
     } else {
-        stopCobotMonitor();
-        cobotModeDisplay.textContent = "Manual";
-        cobotModeDisplay.className = "status";
+        stopCobotMonitor(); // Stop polling
     }
 });
-
-/******************************************************************
- * EMG Data Functions
- ******************************************************************/
 
 // Fetch and process EMG fatigue state
 function processEMGdata() {
@@ -63,10 +43,7 @@ function processEMGdata() {
     opState.className = "processing";
 
     fetch("/processEMG")
-        .then(response => {
-            if (!response.ok) throw new Error("Network response was not ok");
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (data.status === "OK") {
                 opState.textContent = "Normal";
@@ -79,8 +56,7 @@ function processEMGdata() {
                 opState.className = "failed";
             }
         })
-        .catch(error => {
-            console.error("Error processing EMG data:", error);
+        .catch(() => {
             opState.textContent = "Error";
             opState.className = "failed";
         });
@@ -89,18 +65,14 @@ function processEMGdata() {
 // Fetch and display raw EMG values
 function fetchEMGData() {
     fetch('/get_emg_data')
-        .then(response => {
-            if (!response.ok) throw new Error("Network response was not ok");
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             const values = data.data;
             for (let i = 0; i < values.length; i++) {
                 document.getElementById(`emg${i + 1}`).textContent = values[i];
             }
         })
-        .catch(error => {
-            console.error("Error fetching EMG data:", error);
+        .catch(() => {
             for (let i = 1; i <= 6; i++) {
                 document.getElementById(`emg${i}`).textContent = "---";
             }
@@ -108,15 +80,17 @@ function fetchEMGData() {
 }
 
 /******************************************************************
- * Cobot Monitoring Functions
- * – Starts when the "Cobot-Mode" switch is ON
- * – Polls /send_robot_state immediately, then every 5 min
+ * Cobot monitoring
+ * – Starts when the “Cobot‑Mode” switch is ON
+ * – Polls /send_robot_state immediately, then every 5 min
  * – Stops completely when the switch is turned OFF
  ******************************************************************/
-const COBOT_INTERVAL_MS = 1000;   // 5 minutes
+const COBOT_INTERVAL_MS = 5 * 60 * 1000;   // 5 minutes
+let currentCobotState = null;
 
 function startCobotMonitor() {
     clearInterval(cobotTimer);             // safety: kill any old timer
+    updateCobotMode();                     // immediate first check
     cobotTimer = setInterval(updateCobotMode, COBOT_INTERVAL_MS);
 }
 
@@ -125,13 +99,10 @@ function stopCobotMonitor() {
     cobotTimer = null;
 }
 
-// Poll /send_robot_state and update cobot mode display (but don't touch the toggle)
+// Poll /send_robot_state and update cobot mode UI
 function updateCobotMode() {
     fetch('/send_robot_state')
-        .then(response => {
-            if (!response.ok) throw new Error("Network response was not ok");
-            return response.json();
-        })
+        .then(res => res.json())
         .then(data => {
             if (!('robot_state' in data)) {
                 setCobotStatus('---', false);
@@ -140,30 +111,16 @@ function updateCobotMode() {
 
             const newState = data.robot_state; // true = Normal, false = Fatigue
             setCobotStatus(newState ? 'Normal' : 'Fatigue', newState);
+            currentCobotState = newState;
         })
-        .catch(error => {
-            console.error("Error updating cobot mode:", error);
+        .catch(() => {
             setCobotStatus('Error', false);
         });
 }
 
-// Update the Cobot Mode display only (don't modify the toggle state)
+// Update the Cobot Mode display and switch
 function setCobotStatus(text, isNormal) {
     cobotModeDisplay.textContent = text;
-    cobotModeDisplay.className = isNormal ? "ok" : "failed";
+    toggleCobotState.checked = isNormal;
+    toggleCobotState.disabled = !isNormal;
 }
-
-/******************************************************************
- * Initialization
- ******************************************************************/
-// Initialize all displays
-function initializeDisplays() {
-    for (let i = 1; i <= 6; i++) {
-        document.getElementById(`emg${i}`).textContent = "---";
-    }
-    opState.textContent = "---";
-    cobotModeDisplay.textContent = "---";
-}
-
-// Run initialization when page loads
-document.addEventListener('DOMContentLoaded', initializeDisplays);
