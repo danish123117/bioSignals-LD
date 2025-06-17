@@ -157,7 +157,7 @@ def send_robot_state():
         indices = np.array([0, 1, 4, 5])
         Rob_state = False
 
-        stress_state = ngsi_get_current(entity=entityStress, orion=orion, orion_port=orion_port)
+        stress_state = ngsi_get_current(entity=entityStress, orion=orion, orion_port=orion_port, context=CONTEXT_NAME, context_port=CONTEXT_PORT)
 
         mean = np.array(stress_state["meanFrequencyState"]['value'])[indices]
         median = np.array(stress_state["medianFrequencyState"]['value'])[indices]

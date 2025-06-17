@@ -51,12 +51,12 @@ def ngsi_patch(data,entity,orion,orion_port,context,context_port): # this is fin
     response = requests.request("PATCH", url, headers=headers, data=data)
     return response
 
-def ngsi_get_current(entity, orion,orion_port,entity_type='Stress'): # this should be ok
+def ngsi_get_current(entity, orion,orion_port,context,context_port): # this should be ok
     url = f"http://{orion}:{orion_port}/ngsi-ld/v1/entities/{entity}"
 
     payload = {}
     headers = {
-  'Link': '<http://context:5051/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
+  'Link': f'<http://{context}:{context_port}/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
   'Accept': 'application/json'
 }
 
