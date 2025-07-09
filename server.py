@@ -29,7 +29,17 @@ BROKER_IP = os.getenv("MOSQUITTO_CONTAINER_NAME","mosquitto")
 BROKER_PORT = os.getenv("MOSQUITTO_CONTAINER_PORT",1883)
 TOPIC = os.getenv("TOPIC","json/danishabbas1/Robotstate")
 ENTITY_FATIGUE = os.getenv("ENTITY_FATIGUE","urn:ngsi-ld:EmgFrequencyDomainFeatures:001")
+ENTITY_BASELINE = os.getenv("ENTITY_BASELINE","urn:ngsi-ld:baseline:EMG01")
+CANIS_MAJOR_NAME = os.getenv("CANIS_MAJOR_NAME","localhost")
+CANIS_MAJOR_PORT = os.getenv("CANIS_MAJOR_PORT","8080") # multiphhen
+WALLET_ADDRESS = os.getenv("WALLET_ADDRESS","http://vault.canis-major.svc:8200/v1/ethereum/accounts/danish") # this is the vault address for canis major
 #none
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+params_path = os.path.join(script_dir, 'parms.json')
+with open(params_path, 'r') as json_file:
+    BASELINE = json.load(json_file)
+
 
 app = Flask(__name__)
 
@@ -118,10 +128,7 @@ def day_0():
 def anomaly_detector(orion=ORION_NAME,orion_port=ORION_PORT,mintaka=MINTAKA_NAME,mintaka_port=MINTAKA_PORT, context=CONTEXT_NAME,context_port=CONTEXT_PORT):
     '''The looped part has an execution time of ~0.065 seconds'''
     window_length = 5000
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    params_path = os.path.join(script_dir, 'parms.json')
-    with open(params_path, 'r') as json_file:
-        parms = json.load(json_file)
+    parms = BASELINE
       # add context/ context port here
     data = v1.ngsi_get_historical(entity='urn:ngsi-ld:sEMG:EMG1000',window_length=window_length,mintaka=mintaka,mintaka_port=mintaka_port,context=context,context_port=context_port)
 
@@ -211,6 +218,22 @@ def stop_trial():
         return jsonify({"status": "Trial stopped successfully"})
     else:
         return jsonify({"status": "Failed to stop trial", "error": response.text}), response.status_code
+
+@app.route('/load_baseline', methods=['GET', 'POST'])
+def load_baseline():
+    context = CONTEXT_NAME
+    context_port = CONTEXT_PORT
+    global BASELINE
+    print("Loading baseline...")
+    response = v1.ngsi_get_current_canis(entity=ENTITY_BASELINE, canis_major=CANIS_MAJOR_NAME, canis_major_port=CANIS_MAJOR_PORT, context=context, context_port=context_port, wallet_address=WALLET_ADDRESS )
+    if response.status_code == 201:
+        print("201")
+        BASELINE = hp.generate_baseline(response)
+        return jsonify({"status": "Baseline loaded successfully"})
+    else:
+        print("not 201")
+        return jsonify({"status": "Failed to load baseline", "error": response.text}), response.status_code
+
 
 ###################################### old routes ######################################
 """ 

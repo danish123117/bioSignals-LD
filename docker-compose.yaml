@@ -148,7 +148,7 @@ services:
       - default
 
   context: 
-    image: danny0117/incode-heu-contextfiles:1.1.0
+    image: danny0117/incode-heu-contextfiles:2.0.0
     hostname: context
     container_name: context
     expose: 
