@@ -225,14 +225,14 @@ def load_baseline():
     context_port = CONTEXT_PORT
     global BASELINE
     print("Loading baseline...")
-    response = v1.ngsi_get_current_canis(entity=ENTITY_BASELINE, canis_major=CANIS_MAJOR_NAME, canis_major_port=CANIS_MAJOR_PORT, context=context, context_port=context_port, wallet_address=WALLET_ADDRESS )
-    if response.status_code == 201:
+    response1 = v1.ngsi_get_current_canis(entity=ENTITY_BASELINE, canis_major=CANIS_MAJOR_NAME, canis_major_port=CANIS_MAJOR_PORT, context=context, context_port=context_port, wallet_address=WALLET_ADDRESS )
+    if response1:
         print("201")
-        BASELINE = hp.generate_baseline(response)
+        BASELINE = hp.generate_baseline(response1)
         return jsonify({"status": "Baseline loaded successfully"})
     else:
-        print("not 201")
-        return jsonify({"status": "Failed to load baseline", "error": response.text}), response.status_code
+        print("404")
+        return jsonify({"status": "Failed to load baseline", "error": 404}), 404
 
 
 ###################################### old routes ######################################

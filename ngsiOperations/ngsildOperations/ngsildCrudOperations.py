@@ -65,11 +65,11 @@ def ngsi_get_current(entity, orion,orion_port,context,context_port): # this shou
 
 
 def ngsi_get_current_canis(entity, canis_major,canis_major_port,context,context_port,wallet_address): # this should be ok
-    url = f"http://{canis_major}:{canis_major_port}/ngsi-ld/v1/entities/{entity}"
+    url = f"http://{canis_major}:{canis_major_port}/ngsi-ld/v1/entities/{entity}?options=keyValues"
 
     payload = {}
     headers = {
-  'Link': f'<http://{context}:{context_port}/ngsi-context-canis-uc1.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
+  'Link': f'<http://{context}:{context_port}/ngsi-context-canism-uc1.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
   'Accept': 'application/json',
   'Wallet-Type': 'vault',
    'Wallet-Token': 'vault-plaintext-root-token',
