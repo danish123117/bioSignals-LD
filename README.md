@@ -12,9 +12,12 @@ This repo represents the main application of the Use case 1 the app has the foll
 - trigger a complex-event-processing (CEP) workflow that publishes an updated robot cell state based on the fatigue state of the operator.
 
 ## 2. Archetecture
-The Application based around Key FIWARE components namely Orion-LD , Mintaka and IoTAgent-JSON. 
-The picture below depicts the overall Archetecture. 
-![screenshot](Archetecture.png)
+The application is based around key FIWARE components, namely Orion-LD, Mintaka, and IoTAgent-JSON.  
+The picture below depicts the overall architecture.
+
+<p align="center">
+  <img src="Architecture.png" alt="Architecture diagram" width="700">
+</p>
 
 ## 2. How to use the code
 
@@ -108,7 +111,7 @@ via MQTT to the follwing topic json/danishabbas1/EMG1000/attrs. Which follows th
 
 This work was carried out within the framework of the project **P2CODE**, funded by the **European Union** under **Grant Agreement No. 101093069**.
 
-![Funded by the European Union](static\images\Funded.png)
+![Funded by the European Union](Funded.png)
 
 **Funded by the European Union**
 
