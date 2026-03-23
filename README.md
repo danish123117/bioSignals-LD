@@ -19,7 +19,7 @@ The picture below depicts the overall architecture.
   <img src="Architecture.png" alt="Architecture diagram" width="400">
 </p>
 
-## 2. How to use the code
+## 3. How to use the code
 
 ### Prerequisites
 
@@ -90,7 +90,7 @@ Note that the application expects the rest of the FIWARE stack (Orion-LD, IoT Ag
 
 ---
 
-## 3. Related repositories and recommended resources
+## 4. Related repositories and recommended resources
 
 The application relies on the following components referenced in the archetecture and the docker-compose file:
 
@@ -102,23 +102,23 @@ More information about the use of FIWARE components can be found on the followin
 - **NGSI-LD Smart Farm Tutorials**
   `https://ngsi-ld-tutorials.readthedocs.io/en/latest/`
 
-## 4. Sensor info
+## 5. Sensor info
 
 Use case uses BTS FREEMG1000, sEMG sensors. A total of six sensor units were used. An intermediate Sensor logger app was used to publish the data
 via MQTT to the follwing topic json/danishabbas1/EMG1000/attrs. Which follows the schema <payloadFormat>/<apiKey>/<sensorID>/attrs required for IoTAgent-Json.
 
-## 5. Acknowledgement
+## 6. Acknowledgement
 
 This work was carried out within the framework of the project **P2CODE**, funded by the **European Union** under **Grant Agreement No. 101093069**.
 <p align="left">
   <img src="Fundedby.png" alt="Funded by European Union" width="150">
 </p>
 
-## 6. Disclaimer
+## 7. Disclaimer
 
 Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or or the European Commission. Neither the European Union nor the European Commission can be held responsible for them.
 
-## 7. MIT License
+## 8. MIT License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
