@@ -16,7 +16,7 @@ The application is based around key FIWARE components, namely Orion-LD, Mintaka,
 The picture below depicts the overall architecture.
 
 <p align="center">
-  <img src="Architecture.png" alt="Architecture diagram" width="700">
+  <img src="Architecture.png" alt="Architecture diagram" width="400">
 </p>
 
 ## 2. How to use the code
@@ -111,9 +111,7 @@ via MQTT to the follwing topic json/danishabbas1/EMG1000/attrs. Which follows th
 
 This work was carried out within the framework of the project **P2CODE**, funded by the **European Union** under **Grant Agreement No. 101093069**.
 
-![Funded by the European Union](Funded.png)
-
-**Funded by the European Union**
+![Funded by the European Union](Fundedby.png)
 
 ## 6. Disclaimer
 
