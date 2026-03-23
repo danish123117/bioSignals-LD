@@ -111,7 +111,7 @@ via MQTT to the follwing topic json/danishabbas1/EMG1000/attrs. Which follows th
 
 This work was carried out within the framework of the project **P2CODE**, funded by the **European Union** under **Grant Agreement No. 101093069**.
 <p align="left">
-  <img src="Fundedby.png" alt="Funded by European Union" width="150">
+  <img src="Fundedby2.png" alt="Funded by European Union" width="150">
 </p>
 
 ## 7. Disclaimer
