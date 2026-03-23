@@ -59,9 +59,9 @@ services:
       - IOTA_MULTI_CORE=true
       - IOTA_MQTT_HOST=mosquitto # The host name of the MQTT Broker
       - IOTA_MQTT_PORT=1883 # The port the MQTT Broker is listening on to receive topics
-      - IOTA_DEFAULT_RESOURCE= # Default is blank. I'm using MQTT so I don't need a resource
+      - IOTA_DEFAULT_RESOURCE= # Default is blank for MQTT protocol
+      #- IOTA_DEFAULT_RESOURCE=/iot/d # Default resource for HTTP protocol
       - IOTA_DEFAULT_TRANSPORT=MQTT
-     #- IOTA_DEFAULT_RESOURCE=/iot/d
       - IOTA_CB_HOST=orion # name of the context broker to update context
       - IOTA_CB_PORT=${ORION_LD_PORT}
     healthcheck:
@@ -131,7 +131,7 @@ services:
  #     interval: 5s
  
   mosquitto:
-    image: danny0117/mosquitto:0.2.0
+    image: danny0117/mosquitto:${MOSQUITTO_DOCKER_TAG}
     hostname: mosquitto
     container_name: mosquitto
    # labels:
@@ -159,7 +159,8 @@ services:
       - default
 
   application: 
-    image : danny0117/incode-heu-aa3-uc1:1.0.9
+    build: .
+    image : danny0117/incode-heu-aa3-uc1:${APPLICATION_DOCKER_TAG}
     hostname: application
     container_name: application
     expose:

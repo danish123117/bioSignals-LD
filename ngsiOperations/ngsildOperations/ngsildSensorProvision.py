@@ -171,11 +171,6 @@ def sensor_provision_UC2(iota_container_name,iota_container_port,orion, orion_po
 
 def sensor_provision_UC1(iota_container_name,iota_container_port,orion, orion_port):
 
-    #print(servicepath_response.status_code)
-    #print(servicepath_response.text)
-    #provision EMG sensor
-    #url = 'http://iot-agent:4041/iot/devices'
-    #url = 'http://localhost:4041/iot/devices'
     url = f'http://{iota_container_name}:{iota_container_port}/iot/devices'
     headers = {
         'Content-Type': 'application/json',  

@@ -4,3 +4,14 @@ __pycache__
 .venv
 ##.env
 .vscode/
+.git/
+.idea/
+.DS_Store
+*.log
+*.sqlite3
+*.db
+*.bak
+*.swp
+*.swo
+
+

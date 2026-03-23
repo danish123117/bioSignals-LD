@@ -8,7 +8,7 @@ __pycache__
 .idea/
 .DS_Store
 *.log
-docker-compose.yml
+docker-compose.yaml
 *.cofig
 mosquitto
 .gitignore

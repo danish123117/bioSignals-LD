@@ -114,19 +114,7 @@ def get_emg_data():
         data_values = ["---"] * 8  
 
     return jsonify({"data": data_values})
-
-@app.route('/historypage')
-def go_to_history():
-    print("this gives me a list of historical")
-
-@app.route('/download')
-def download_trial_data():
-    print('this downloads the data of a trial')
-
-@app.route('/detachsensors')
-def download_trial_data_2():
-    print('this downloads the data of a trial')
-    
+   
 
 if __name__ == "__main__":
     serve(app, host= "0.0.0.0", port= 3002)
