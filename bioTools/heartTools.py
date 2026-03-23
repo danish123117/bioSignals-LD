@@ -4,7 +4,7 @@ from scipy import stats
 def timeDomainFeatures(rr_list):
     '''
     Takes a list or rr intervals as input and outputs
-    a dictionary of time domain features 
+    a dictionary of time domain features  
     '''
     hrv_tdf ={}
     rr_list_np = np.array(rr_list) # this results in order of magnitude difference in processing times 

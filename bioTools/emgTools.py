@@ -8,7 +8,7 @@ def data_filter(data, sampling_frequency, band_lower, band_upper,notch_filter=Tr
     band_lower and band_upper: are the lower and upper limits of band pass filter
     notch_filter:  is a boolean which can be used to switch off the notch filter it is by default True
     removed_frequency: is the frequency removed by the notch filter by default it is set to 50hz AC frequency
-    notch_quality : is the quality of notch filteration set to 30 by default.
+    notch_quality : is the quality of notch filteration set to 30 by default. 
     """
     if axis == 1: 
         data = data.T

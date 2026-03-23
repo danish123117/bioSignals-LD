@@ -16,3 +16,4 @@ def data_to_np(data, key="data"):
    # print(parsed_data)
     numpy_arr  = np.array(parsed_data)
     return numpy_arr
+

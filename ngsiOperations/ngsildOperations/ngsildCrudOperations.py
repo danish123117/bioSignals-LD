@@ -19,6 +19,7 @@ def stress_payload(frequency_median_norm, frequency_mean_norm, frequency_meanPow
      }
     return json.dumps(payload_raw)
 
+
 def ngsi_get_historical(entity,  mintaka, mintaka_port, window_length=5000, attribute = "data"):  # double check on EMG sensor entity what attribute reprements the signal values
     """
     The function queries historical data from TimescaleDB using mintaka API 
