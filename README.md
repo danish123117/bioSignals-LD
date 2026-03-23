@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-`bioSignals-LD` was developed as a part of Intligent Worker Assistance Application Area of the P2CODE Project. 
+`bioSignals-LD` was developed as a part of Intelligent Worker Assistance Application Area of the P2CODE Project. 
 
 This repo represents the main application of the Use case 1 the app has the following functionalities. 
 
@@ -13,7 +13,7 @@ This repo represents the main application of the Use case 1 the app has the foll
 
 ## 2. Archetecture
 The Application based around Key FIWARE components namely Orion-LD , Mintaka and IoTAgent-JSON. 
-The picture below depicts the overall archetecture. 
+The picture below depicts the overall Archetecture. 
 ![screenshot](Archetecture.png)
 
 ## 2. How to use the code
@@ -87,7 +87,7 @@ Note that the application expects the rest of the FIWARE stack (Orion-LD, IoT Ag
 
 ---
 
-## 3. Related repositories and recomended resources
+## 3. Related repositories and recommended resources
 
 The application relies on the following components referenced in the archetecture and the docker-compose file:
 
@@ -96,13 +96,13 @@ The application relies on the following components referenced in the archetectur
 
 More information about the use of FIWARE components can be found on the following links: 
 
-- **NGIS-LD Smart Farm Tutorials**
+- **NGSI-LD Smart Farm Tutorials**
   `https://ngsi-ld-tutorials.readthedocs.io/en/latest/`
 
 ## 4. Sensor info
 
 Use case uses BTS FREEMG1000, sEMG sensors. A total of six sensor units were used. An intermediate Sensor logger app was used to publish the data
-via MQTT to the follwonig topic json/danishabbas1/EMG1000/attrs. Which follows the schema <payloadFormat>/<apiKey>/<sensorID>/attrs required for IoTAgent-Json.
+via MQTT to the follwing topic json/danishabbas1/EMG1000/attrs. Which follows the schema <payloadFormat>/<apiKey>/<sensorID>/attrs required for IoTAgent-Json.
 
 ## 5. Acknowledgement
 
